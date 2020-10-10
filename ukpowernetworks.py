@@ -38,7 +38,7 @@ ROOT_DIRECTORY = pathlib.Path("data/ukpowernetworks")
 
 with requests.Session() as session:
     for incident_id in get_incident_ids(session):
-        print(f"Incident: {incident}")
+        print(f"Incident reference: {incident_id}")
         incident = get_incident_details(session, incident_id)
 
         creation_time = dateutil.parser.parse(incident["UKPNIncident"]["CreationDateTime"])
