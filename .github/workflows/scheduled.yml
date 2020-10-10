@@ -1,0 +1,34 @@
+name: Scrape latest data
+
+on:
+  schedule:
+    - cron: '0,20,40 * * * *'
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          repository: james-atkins/powercuts
+          path: data
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install dependencies
+        run: |-
+          cd scraper
+          pip install -r requirements.txt
+      - name: Scrape
+        run: python ukpowernetworks.py
+      - name: Commit and push
+        run: |-
+          cd data
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
