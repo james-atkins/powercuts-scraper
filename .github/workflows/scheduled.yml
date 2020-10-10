@@ -18,9 +18,7 @@ jobs:
         with:
           python-version: '3.8'
       - name: Install dependencies
-        run: |-
-          cd scraper
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
       - name: Scrape
         run: python ukpowernetworks.py
       - name: Commit and push
