@@ -47,4 +47,4 @@ with requests.Session() as session:
         directory.mkdir(parents=True, exist_ok=True)
 
         with open(directory / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
-            json.dump(incident, f)
+            json.dump(incident, f, ensure_ascii=False, indent=2)
