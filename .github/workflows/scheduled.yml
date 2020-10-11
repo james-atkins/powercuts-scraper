@@ -23,7 +23,7 @@ jobs:
       - name: Scrape
         run: |-
           python ukpowernetworks.py
-          ./ssen.sh
+          python ssen.py
       - name: Commit and push
         run: |-
           cd data
