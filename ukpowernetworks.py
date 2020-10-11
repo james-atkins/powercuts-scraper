@@ -40,6 +40,7 @@ def get_incident_details(session: requests.Session, incident_id: str) -> dict:
 
 
 if __name__ == "__main__":
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     retry_strategy = Retry(
         total=RETRIES,
         status_forcelist=[429, 500, 502, 503, 504],
@@ -59,9 +60,7 @@ if __name__ == "__main__":
             except KeyError:
                 pass
 
-        DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-        with open(DATA_DIR / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
-            json.dump(incident, f, ensure_ascii=False, indent=2)
+            with open(DATA_DIR / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
+                json.dump(incident, f, ensure_ascii=False, indent=2)
 
 
