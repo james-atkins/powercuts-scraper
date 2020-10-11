@@ -7,7 +7,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-DATA_DIR = pathlib.Path("data")
+DATA_DIR = pathlib.Path("data") / "ukpowernetworks"
 RETRIES = 3
 TIMEOUT = 5
 
@@ -48,11 +48,9 @@ if __name__ == "__main__":
     adapter = HTTPAdapter(max_retries=retry_strategy)
     with requests.Session() as session:
         session.mount("https://", adapter)
-        
+
         incident_ids = list(get_incident_ids(session))
         incident_ids.sort()
-
-        incidents = {}
 
         for incident_id in incident_ids:
             print(f"Incident reference: {incident_id}")
@@ -64,9 +62,9 @@ if __name__ == "__main__":
             except KeyError:
                 pass
 
-            incidents[incident_id] = incident
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
+        with open(DATA_DIR / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
+            json.dump(incident, f, ensure_ascii=False, indent=2)
 
-    with open(DATA_DIR / "ukpowernetworks.json", "w", newline="\n", encoding="utf-8") as f:
-        json.dump(incidents, f, ensure_ascii=False, indent=2)
+
