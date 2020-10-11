@@ -49,10 +49,7 @@ if __name__ == "__main__":
     with requests.Session() as session:
         session.mount("https://", adapter)
 
-        incident_ids = list(get_incident_ids(session))
-        incident_ids.sort()
-
-        for incident_id in incident_ids:
+        for incident_id in get_incident_ids(session):
             print(f"Incident reference: {incident_id}")
             incident = get_incident_details(session, incident_id)
 
