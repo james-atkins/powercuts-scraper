@@ -21,7 +21,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Scrape
-        run: python ukpowernetworks.py
+        run: |-
+          python ukpowernetworks.py
       - name: Commit and push
         run: |-
           cd data
