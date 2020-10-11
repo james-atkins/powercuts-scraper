@@ -44,7 +44,10 @@ with requests.Session() as session:
         creation_time = dateutil.parser.parse(incident["UKPNIncident"]["CreationDateTime"])
 
         # Remove timestamp field as it seems to change regardless
-        del incident["Timestamp"]
+        try:
+            del incident["UKPNIncident"]["Timestamp"]
+        except KeyError:
+            pass
 
         directory = ROOT_DIRECTORY / str(creation_time.year) / str(creation_time.month)
         directory.mkdir(parents=True, exist_ok=True)
