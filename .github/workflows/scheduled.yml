@@ -24,6 +24,7 @@ jobs:
         run: |-
           python ukpowernetworks.py
           python ssen.py
+          python westernpower.py
       - name: Commit and push
         run: |-
           cd data
