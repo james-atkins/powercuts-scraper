@@ -2,7 +2,7 @@ from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-RETRIES = 3
+RETRIES = 5
 TIMEOUT = 5
 
 

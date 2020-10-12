@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
     with make_session() as session:
         # Website is quite slow so have a high timeout threshold
-        r = session.get("https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx", timeout=10)
+        r = session.get("https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx", timeout=15)
 
         m = re.search("arrPowercutsPostcodes: (?P<data>\[.*\]),", r.text)
         data = json.loads(m["data"])
