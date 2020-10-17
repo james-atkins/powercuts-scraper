@@ -26,7 +26,7 @@ jobs:
           python ssen.py
           python westernpower.py
           python spenergynetworks.py
-          # python enwl.py
+          python enwl.py
       - name: Commit and push
         run: |-
           cd data
