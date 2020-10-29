@@ -48,7 +48,7 @@ if __name__ == "__main__":
             # Remove timestamp field as it seems to change regardless
             try:
                 del incident["UKPNIncident"]["Timestamp"]
-            except KeyError:
+            except (KeyError, TypeError):
                 pass
 
             with open(DATA_DIR / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
