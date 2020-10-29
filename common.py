@@ -8,16 +8,11 @@ TIMEOUT = 5
 
 class TimeoutHTTPAdapter(HTTPAdapter):
     def __init__(self, *args, **kwargs):
-        self.timeout = TIMEOUT
-        if "timeout" in kwargs:
-            self.timeout = kwargs["timeout"]
-            del kwargs["timeout"]
+        self.timeout = kwargs.pop("timeout", TIMEOUT)
         super().__init__(*args, **kwargs)
 
     def send(self, request, **kwargs):
-        timeout = kwargs.get("timeout")
-        if timeout is None:
-            kwargs["timeout"] = self.timeout
+        kwargs.setdefault("timeout", self.timeout)
         return super().send(request, **kwargs)
 
 
