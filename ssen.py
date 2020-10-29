@@ -10,6 +10,7 @@ if __name__ == "__main__":
 
     with make_session() as session:
         r = session.get("https://www.ssen.co.uk/Sse_Components/Views/Controls/FormControls/PowerTrackHandler.ashx", verify=False)
+        r.raise_for_status()
 
         data = r.json()
 

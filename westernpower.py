@@ -11,6 +11,7 @@ DATA_DIR = pathlib.Path("data") / "westernpower"
 
 def get_incident_ids(session: requests.Session) -> List[str]:
     r = session.get("https://powercuts.westernpower.co.uk/__powercuts/getIncidentsAndAlertSummary")
+    r.raise_for_status()
 
     data = r.json()
     incidents = json.loads(data["incidents"])
