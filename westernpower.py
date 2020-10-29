@@ -33,7 +33,14 @@ if __name__ == "__main__":
     with make_session() as session:
         for incident_id in get_incident_ids(session):
             print(f"Incident Id: {incident_id}")
-            incident = get_incident_details(session, incident_id)
+
+            try:
+                incident = get_incident_details(session, incident_id)
+            except requests.HTTPError as e:
+                if e.response.status_code == 404:
+                    continue
+                else:
+                    raise e
 
             with open(DATA_DIR / f"{incident_id}.json", "w", newline="\n", encoding="utf-8") as f:
                 json.dump(incident, f, ensure_ascii=False, indent=2)
