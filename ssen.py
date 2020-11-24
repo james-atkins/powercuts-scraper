@@ -13,10 +13,10 @@ if __name__ == "__main__":
         r.raise_for_status()
 
         data = r.json()
+        if data:
+            for fault in data["Faults"]:
+                fault_ref = fault["Reference"]
+                print(f"Fault ref: {fault_ref}")
 
-        for fault in data["Faults"]:
-            fault_ref = fault["Reference"]
-            print(f"Fault ref: {fault_ref}")
-
-            with open(DATA_DIR / f"{fault_ref}.json", "w", newline="\n", encoding="utf-8") as f:
-                json.dump(fault, f, ensure_ascii=False, indent=2)
+                with open(DATA_DIR / f"{fault_ref}.json", "w", newline="\n", encoding="utf-8") as f:
+                    json.dump(fault, f, ensure_ascii=False, indent=2)
