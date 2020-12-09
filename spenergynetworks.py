@@ -14,7 +14,8 @@ if __name__ == "__main__":
         r = session.get("https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx", timeout=30)
         r.raise_for_status()
 
-        if r.url == "https://www.spenergynetworks.co.uk/pages/power_cuts_not_available.aspx":
+        if r.url in ["https://www.spenergynetworks.co.uk/pages/power_cuts_not_available.aspx",
+                     "https://www.spenergynetworks.co.uk/pages/500.aspx"]:
             # Not available
             pass
         else:
