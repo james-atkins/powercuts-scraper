@@ -22,7 +22,7 @@ def get_faults(session: requests.Session):
     r.raise_for_status()
     data = r.json()
 
-    total_results = data["TotalResults"]
+    total_results = int(data["TotalResults"])
     faults = data["Items"]
 
     # A very big page size is used so this should not fail...
